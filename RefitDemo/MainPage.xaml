@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:RefitDemo.ViewModels"
+    mc:Ignorable="d"
+    Padding="10,30,10,5"
+    IsBusy="{Binding IsBusy}"
+    x:Class="RefitDemo.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Entry
+            Text="{Binding Search, Mode=TwoWay}"
+            Placeholder="Search currency"
+            HorizontalOptions="FillAndExpand"/>
+
+        <Button
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Fill"
+            Text="Search"
+            Command="{Binding LoadCoinsCommand}"
+            CornerRadius="3"/>
+
+        <ListView
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            ItemsSource="{Binding Coins}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Id}" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding Symbol}" Grid.Row="0" Grid.Column="1"/>
+                            <Label Text="{Binding Name}" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
